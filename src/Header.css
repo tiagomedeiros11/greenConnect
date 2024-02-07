@@ -1,0 +1,91 @@
+header {
+    background: #06182D;
+    color: #fff;
+    padding: 10px 20px;
+  }
+  .header-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .header-link:hover {
+    color: inherit;
+    
+  }.header-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .header-link:hover {
+    color: inherit;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens horizontalmente */
+    width: 200px; /* Define a largura do formulário */
+    margin: 0 auto; /* Centraliza o formulário horizontalmente */
+  }
+  
+  .login-form input {
+    margin-bottom: 10px;
+  }
+  
+  .login-btn {
+    background-color: unset;
+    background: unset;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.7s all ease; /* Adiciona uma transição suave para a mudança de cor */
+    border-radius: 26px;
+  }
+ 
+  .login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Altera a cor de fundo quando o mouse está sobre o botão */
+  }
+
+  
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    margin: 0 auto;
+  }
+  
+  .signup-form input {
+    margin-bottom: 10px;
+  }
+  
+  .signup-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.7s all ease;
+    border-radius: 26px;
+  }
+  
+  .signup-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
