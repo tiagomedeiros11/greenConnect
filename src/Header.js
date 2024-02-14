@@ -12,7 +12,7 @@ function Header() {
   const [signupLastName, setSignupLastName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
-  const [signupUser, setSignupUser] = useState('');
+  const [signupUser, setSignupUser] = useState(''); // Adiciona estado para o nome de usuário
 
   const handleLoginClick = () => {
     setShowLoginForm(true);
@@ -50,26 +50,25 @@ function Header() {
 
   const handleSignupUserChange = (e) => {
     setSignupUser(e.target.value);
-  };
+  }; // Adiciona função para atualizar o estado do nome de usuário
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // Ainda adicionar regrar de login
+    // Ainda falta adicionar regra de login
   };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    // Criar um objeto com os dados do novo usuário
+
     const newUser = {
       first_name: signupFirstName,
       last_name: signupLastName,
       email: signupEmail,
-      password: signupPassword,
-      username: signupUser  // Incluindo o campo do usuário no objeto
+      username: signupUser,
+      password: signupPassword
     };
 
     try {
-      // Enviar os dados do novo usuário para a API externa
       const response = await fetch('http://38.242.136.106:8000/api/register', {
         method: 'POST',
         headers: {
@@ -79,18 +78,32 @@ function Header() {
       });
 
       if (response.ok) {
-        // O usuário foi cadastrado com sucesso
-        alert('Usuário cadastrado com sucesso!')
-        // Limpar os campos do formulário de cadastro
+        alert('Usuário cadastrado com sucesso!');
         setSignupFirstName('');
         setSignupLastName('');
         setSignupEmail('');
         setSignupPassword('');
-        setSignupUser('');  // Limpar o campo do usuário
+        setSignupUser('');
 
-        window.location.href = '/';
+        // Faz a requisição para o endpoint de login após o cadastro bem-sucedido
+        const loginResponse = await fetch('http://38.242.136.106:8000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: newUser.username,
+            password: newUser.password
+          })
+        });
+
+        if (loginResponse.ok) {
+          alert('Login bem-sucedido!');
+          // Faça o que for necessário após o login bem-sucedido
+        } else {
+          alert('Usuario ou senha inválido', loginResponse.statusText);
+        }
       } else {
-        // Se a solicitação não foi bem-sucedida, exibir mensagem de erro
         console.error('Erro ao cadastrar usuário:', response.statusText);
       }
     } catch (error) {
@@ -115,11 +128,11 @@ function Header() {
             )}
             {showSignupForm && (
               <form className="signup-form" onSubmit={handleSignupSubmit}>
-                <input type="text" placeholder="Nome" value={signupFirstName} onChange={handleSignupFirstNameChange} />
-                <input type="text" placeholder="Sobrenome" value={signupLastName} onChange={handleSignupLastNameChange} />
+                <input type="text" placeholder="First name" value={signupFirstName} onChange={handleSignupFirstNameChange} />
+                <input type="text" placeholder="Last name" value={signupLastName} onChange={handleSignupLastNameChange} />
+                <input type="text" placeholder="User Name" value={signupUser} onChange={handleSignupUserChange} />
                 <input type="email" placeholder="Email" value={signupEmail} onChange={handleSignupEmailChange} />
-                <input type="password" placeholder="Senha" value={signupPassword} onChange={handleSignupPasswordChange} />
-                <input type="text" placeholder="Usuário" value={signupUser} onChange={handleSignupUserChange} /> {/* Novo campo de entrada para o usuário */}
+                <input type="password" placeholder="Password" value={signupPassword} onChange={handleSignupPasswordChange} />
                 <button type="submit">Cadastrar</button>
               </form>
             )}
